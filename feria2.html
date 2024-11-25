@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historial de Detecciones de Gas</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(to right, #ff4500, #ff6347);
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            justify-content: center;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #fdd835;
+        }
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: rgba(0, 0, 0, 0.7);
+            color: #fff;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #ff5722;
+        }
+        td {
+            background-color: #333;
+        }
+        a {
+            padding: 10px 20px;
+            background: #ff9800;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+        a:hover {
+            background: #f57c00;
+        }
+        .high-level {
+            background-color: #e53935;
+            color: #fff;
+        }
+        .notification {
+            display: none;
+            background-color: #ff3d00;
+            color: white;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            font-weight: bold;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Historial de Detecciones de Gas</h1>
+    <div class="notification" id="notification">¡Alerta! Niveles de gas peligrosos detectados.</div>
+    <table>
+        <thead>
+            <tr>
+                <th>Nivel de Gas (ppm)</th>
+                <th>Hora</th>
+            </tr>
+        </thead>
+        <tbody id="historial">
+            <!-- Los datos se insertarán aquí dinámicamente -->
+        </tbody>
+    </table>
+    <a href="index.html">Volver al Inicio</a>
+
+    <script>
+        // Datos simulados para el historial
+        const historial = [
+            { nivel: 450, hora: "10:00:15" },
+            { nivel: 560, hora: "10:05:30" },
+            { nivel: 600, hora: "10:15:45" },
+            { nivel: 1200, hora: "10:30:00" }  // Nivel alto de gas
+        ];
+
+        const historialEl = document.getElementById('historial');
+        const notificationEl = document.getElementById('notification');
+
+        // Función para mostrar notificaciones
+        function showNotification(message) {
+            notificationEl.innerText = message;
+            notificationEl.style.display = 'block';
+            setTimeout(() => {
+                notificationEl.style.display = 'none';
+            }, 5000); // Ocultar después de 5 segundos
+        }
+
+        // Llenar la tabla con los datos simulados
+        historial.forEach(registro => {
+            const row = document.createElement('tr');
+            
+            // Comprobación de nivel alto de gas
+            const highLevelClass = registro.nivel > 1000 ? 'high-level' : '';
+
+            row.innerHTML = `
+                <td class="${highLevelClass}">${registro.nivel}</td>
+                <td class="${highLevelClass}">${registro.hora}</td>
+            `;
+            historialEl.appendChild(row);
+
+            // Mostrar notificación si el nivel de gas es peligroso
+            if (registro.nivel > 1000) {
+                showNotification('¡Alerta! Niveles de gas peligrosos detectados.');
+            }
+        });
+    </script>
+</body>
+</html>

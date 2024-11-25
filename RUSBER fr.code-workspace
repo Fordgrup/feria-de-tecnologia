@@ -1,0 +1,22 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"name": "rvj",
+			"path": "rvj"
+		},
+		{
+			"name": "xd",
+			"path": "../../Documents/PlatformIO/Projects/xd"
+		},
+		{
+			"name": "fr",
+			"path": "../../Documents/PlatformIO/Projects/fr"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "RUSBER"
+	}
+}
